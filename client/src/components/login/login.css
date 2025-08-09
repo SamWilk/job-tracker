@@ -1,0 +1,103 @@
+/* login.css */
+
+/* Root variables (reuse these in your global styles if possible) */
+:root {
+  --primary-color: #2563eb;
+  --primary-color-hover: #1d4ed8;
+  --text-color: #111827;
+  --text-muted: #374151;
+  --bg-light: #f9fafb;
+  --radius-md: 0.5rem;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.login-page {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: var(--bg-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 2rem 2.5rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+}
+
+.login-title {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  color: var(--text-color);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.login-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-top: 1rem;
+}
+
+.login-form input,
+.login-form textarea,
+.login-form select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.login-form input:focus,
+.login-form textarea:focus,
+.login-form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+.error {
+  color: #dc2626; /* red-600 */
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.login-form button[type="submit"] {
+  margin-top: 2rem;
+  width: 100%;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 1.125rem;
+  transition: background-color 0.2s ease;
+}
+
+.login-form button[type="submit"]:hover,
+.login-form button[type="submit"]:focus {
+  background-color: var(--primary-color-hover);
+  outline: none;
+}
