@@ -1,4 +1,5 @@
-FROM node:18-alpine
+# Stage 1: Build React app
+FROM node:18-alpine AS builder
 
 RUN addgroup -S trackr-group && adduser -S trackr-user -G trackr-group
 WORKDIR /app
@@ -9,12 +10,21 @@ RUN npm install
 COPY --chown=trackr-user:trackr-group . .
 
 RUN npm run build
-RUN npm install -g serve
 
 RUN chown -R trackr-user:trackr-group /app
 
 USER trackr-user
 
-EXPOSE 3000
+FROM nginx:alpine
 
-CMD ["serve", "-s", "dist", "-l", "3000"]
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+COPY default.conf /etc/nginx/conf.d/default.conf
+COPY ./certs/localhost.cert /etc/nginx/certs/localhost.cert
+COPY ./certs/localhost.key /etc/nginx/certs/localhost.key
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

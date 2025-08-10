@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: job-trackr-client
     ports:
-      - "3000:3000" # Client production serve port
+      - "443:443"
     networks:
       - jobtrackr-net
     restart: unless-stopped
@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: job-trackr-server
     ports:
-      - "3001:3001" # HTTPS API port
+      - "3001:3001"
     networks:
       - jobtrackr-net
     restart: unless-stopped

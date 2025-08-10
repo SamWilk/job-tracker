@@ -21,6 +21,7 @@ export default function SignupPage() {
           validationSchema={Yup.object({
             name: Yup.string()
               .max(50, "Must be 50 characters or less")
+              .matches(/^\S+$/, "Name cannot contain spaces")
               .required("Required"),
             email: Yup.string()
               .email("Invalid email address")
@@ -30,26 +31,44 @@ export default function SignupPage() {
               .required("Required"),
           })}
           onSubmit={async (values, { setSubmitting }) => {
+            setSubmitting(false);
+            const name = values.name;
+            const email = values.email;
             try {
-              const response = await fetch(`${apiUrl}/api/hello`, {
-                method: "GET",
+              const response = await fetch(`${apiUrl}/users`, {
+                method: "POST",
                 credentials: "include",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  name: name,
+                  email: email,
+                }),
               });
 
               if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
               } else {
-                Navigate("/Home");
+                var body;
+                try {
+                  body = await response.json();
+                } catch (err) {
+                  console.error("Error parsing response from api", err);
+                }
+                alert(`Account created successfully for ${name}`);
+                Navigate(
+                  `/Home?name=${encodeURIComponent(name)}&id=${body.id}`
+                );
               }
             } catch (err) {
               console.error("Error hitting api", err);
             }
-            setSubmitting(false);
           }}
         >
           {({ isSubmitting }) => (
             <Form className="signup-form">
-              <label htmlFor="name">Full Name</label>
+              <label htmlFor="name">User Name</label>
               <Field name="name" type="text" />
               <ErrorMessage name="name" component="div" className="error" />
 

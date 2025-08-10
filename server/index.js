@@ -2,8 +2,10 @@ import fs from "fs";
 import https from "https";
 import express from "express";
 import cors from "cors";
+import usersRouter from "./routes/users.js";
 
 const app = express();
+app.use(express.json());
 
 app.use(
   cors({
@@ -12,19 +14,13 @@ app.use(
   })
 );
 
-app.use(express.json());
+app.use("/users", usersRouter);
 
-app.get("/api/hello", (req, res) => {
-  res.json({ message: "Hello from secure server!" });
-});
-
-// Load SSL key/cert
 const sslOptions = {
   key: fs.readFileSync("./certs/server.key"),
   cert: fs.readFileSync("./certs/server.cert"),
 };
 
-// Start HTTPS server
 https.createServer(sslOptions, app).listen(3001, () => {
-  console.log("✅ HTTPS Server running at https://localhost:3001");
+  console.log("HTTPS API running on https://localhost:3001");
 });
