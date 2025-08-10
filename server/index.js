@@ -20,8 +20,8 @@ app.get("/api/hello", (req, res) => {
 
 // Load SSL key/cert
 const sslOptions = {
-  key: fs.readFileSync("../certs/server.key"),
-  cert: fs.readFileSync("../certs/server.cert"),
+  key: fs.readFileSync("./certs/server.key"),
+  cert: fs.readFileSync("./certs/server.cert"),
 };
 
 // Start HTTPS server

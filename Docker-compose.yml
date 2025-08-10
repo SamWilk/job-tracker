@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: job-trackr-client
+    ports:
+      - "3000:3000" # Client production serve port
+    networks:
+      - jobtrackr-net
+    restart: unless-stopped
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: job-trackr-server
+    ports:
+      - "3001:3001" # HTTPS API port
+    networks:
+      - jobtrackr-net
+    restart: unless-stopped
+    depends_on:
+      - client
+    environment:
+      NODE_ENV: production
+
+networks:
+  jobtrackr-net:
+    driver: bridge

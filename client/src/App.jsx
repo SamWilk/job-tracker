@@ -2,8 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/navbar/navbar";
 import SignupPage from "./components/signup/signup";
 import LandingPage from "./components/landingpage/landingpage";
-import NotFound from "./components/notFound/notFound";
 import LoginPage from "./components/login/login";
+import NotFound from "./components/notFound/notFound";
 
 export default function App() {
   return (
