@@ -1,7 +1,8 @@
 #!/bin/bash
 
-DOMAIN=${1:-localhost} # Default to 'localhost' if no argument is provided
-CERT_DIR="./${DOMAIN}/certs"
+DOMAIN=${1:-localhost}
+DIR=${2:-server}
+CERT_DIR="./${DIR}/certs"
 KEY_FILE="${CERT_DIR}/${DOMAIN}.key"
 CRT_FILE="${CERT_DIR}/${DOMAIN}.cert"
 CSR_FILE="${CERT_DIR}/${DOMAIN}.csr"
