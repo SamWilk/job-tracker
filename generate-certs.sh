@@ -1,12 +1,14 @@
 #!/bin/bash
 
-DOMAIN="localhost"
-CERT_DIR="./client/certs"
+DOMAIN=${1:-localhost} # Default to 'localhost' if no argument is provided
+CERT_DIR="./${DOMAIN}/certs"
 KEY_FILE="${CERT_DIR}/${DOMAIN}.key"
 CRT_FILE="${CERT_DIR}/${DOMAIN}.cert"
 CSR_FILE="${CERT_DIR}/${DOMAIN}.csr"
 EXT_FILE="${CERT_DIR}/${DOMAIN}.ext"
 DAYS_VALID=365
+
+echo "Using domain: $DOMAIN"
 
 # Create cert directory if it doesn't exist
 if [ ! -d "$CERT_DIR" ]; then
