@@ -1,3 +1,7 @@
 certs/
 
 .env*
+
+/postgres/sql-scripts
+/postgres/pg_hba.conf
+/postgres/postgresql.conf

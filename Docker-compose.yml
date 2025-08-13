@@ -30,24 +30,25 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: samwilk
-      DB_PASSWORD: ${DB_PASSWORD}
+      DB_PASSWORD: password
       DB_NAME: jobtrackr
 
   db:
     image: postgres:15
     container_name: job-trackr-db
     restart: unless-stopped
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: jobtrackr
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./postgres/postgresql.conf:/etc/postgresql/postgresql.conf:ro
       - ./postgres/pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
-      - ./postgres/init-user.sql:/docker-entrypoint-initdb.d/init-user.sql:ro
-      - ./postgres/certs/server.cert:/var/lib/postgresql/certs/server.cert:ro
-      - ./postgres/certs/server.key:/var/lib/postgresql/certs/server.key:ro
+      - ./postgres/certs/localhost.cert:/var/lib/postgresql/certs/localhost.cert:ro
+      - ./postgres/certs/localhost.key:/var/lib/postgresql/certs/localhost.key:ro
     command: postgres -c 'config_file=/etc/postgresql/postgresql.conf' -c 'hba_file=/etc/postgresql/pg_hba.conf'
     networks:
       - jobtrackr-net
