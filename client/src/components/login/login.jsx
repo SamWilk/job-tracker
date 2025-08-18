@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./login.css";
 import UrlConfig from "../../../environment/getURLConfig";
+import { useAuthCheck } from "../../hooks/auth/useAuth";
 
 export default function LoginPage() {
   const apiUrl = UrlConfig.getApiUrl();
   const navigate = useNavigate();
+  const { refreshAuth } = useAuthCheck();
 
   return (
     <main className="login-page">
@@ -28,16 +30,33 @@ export default function LoginPage() {
           })}
           onSubmit={async (values, { setSubmitting }) => {
             try {
-              // Example login API call — replace with your real endpoint
-              const response = await fetch(`${apiUrl}/api/hello`, {
-                method: "GET",
+              const email = values.email;
+              const password = values.password;
+              const response = await fetch(`${apiUrl}/users/login`, {
+                method: "POST",
                 credentials: "include",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: email,
+                  password: password,
+                }),
               });
 
               if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
               } else {
-                navigate("/home");
+                var body;
+                var user;
+                try {
+                  body = await response.json();
+                  user = body.user;
+                } catch (err) {
+                  console.error("Error parsing response from api", err);
+                }
+                await refreshAuth();
+                navigate(`/Home?username=${user.username}`);
               }
             } catch (err) {
               console.error("Login error", err);

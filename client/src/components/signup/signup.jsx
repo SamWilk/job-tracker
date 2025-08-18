@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./signup.css";
 import UrlConfig from "../../../environment/getURLConfig";
+import { useAuthCheck } from "../../hooks/auth/useAuth";
 
 export default function SignupPage() {
   const apiUrl = UrlConfig.getApiUrl();
   const Navigate = useNavigate();
+  const { refreshAuth } = useAuthCheck();
 
   return (
     <main className="signup-page">
@@ -34,6 +36,7 @@ export default function SignupPage() {
             setSubmitting(false);
             const name = values.name;
             const email = values.email;
+            const password = values.password;
             try {
               const response = await fetch(`${apiUrl}/users`, {
                 method: "POST",
@@ -42,8 +45,9 @@ export default function SignupPage() {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  name: name,
+                  username: name,
                   email: email,
+                  password: password,
                 }),
               });
 
@@ -57,9 +61,8 @@ export default function SignupPage() {
                   console.error("Error parsing response from api", err);
                 }
                 alert(`Account created successfully for ${name}`);
-                Navigate(
-                  `/Home?name=${encodeURIComponent(name)}&id=${body.id}`
-                );
+                await refreshAuth();
+                Navigate(`/Home?username=${body.username}`);
               }
             } catch (err) {
               console.error("Error hitting api", err);

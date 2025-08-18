@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: job-trackr-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: jobtrackr
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+      - ./postgres/pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+      - ./postgres/certs/localhost.cert:/var/lib/postgresql/certs/localhost.cert:ro
+      - ./postgres/certs/localhost.key:/var/lib/postgresql/certs/localhost.key:ro
+    command: postgres -c 'config_file=/etc/postgresql/postgresql.conf' -c 'hba_file=/etc/postgresql/pg_hba.conf'
+    networks:
+      - jobtrackr-net
+
+networks:
+  jobtrackr-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
