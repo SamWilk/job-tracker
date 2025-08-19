@@ -51,17 +51,9 @@ export default function LoginPage({ recheck }) {
                   throw new Error(`HTTP error! status: ${response.status}`);
                 }
               } else {
-                var body;
-                var user;
-                try {
-                  body = await response.json();
-                  user = body.user;
-                } catch (err) {
-                  console.error("Error parsing response from api", err);
-                }
                 setInvalid(false);
                 await recheck();
-                navigate(`/Home?username=${user.username}`);
+                navigate(`/Home`);
               }
             } catch (err) {
               console.error("Login error", err);

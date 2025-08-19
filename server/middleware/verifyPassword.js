@@ -14,7 +14,7 @@ export default async function verifyPassword(req, res, next) {
 
   try {
     const result = await pool.query(
-      "SELECT id, username, password_hash FROM users WHERE email = $1",
+      "SELECT id, username, password_hash, is_validated FROM users WHERE email = $1",
       [email]
     );
 
@@ -22,16 +22,20 @@ export default async function verifyPassword(req, res, next) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    const user = result.rows[0];
-    const match = await bcrypt.compare(password, user.password_hash);
+    const { id, username, password_hash, is_validated } = result.rows[0];
+    const match = await bcrypt.compare(password, password_hash);
 
     if (!match) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ username: user.username }, JWT_SECRET, {
-      expiresIn: JWT_EXPIRY,
-    });
+    const token = jwt.sign(
+      { id: id, username: username, email: email, is_validated: is_validated },
+      JWT_SECRET,
+      {
+        expiresIn: JWT_EXPIRY,
+      }
+    );
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -40,7 +44,7 @@ export default async function verifyPassword(req, res, next) {
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
     });
 
-    req.user = { id: user.id, username: user.username };
+    req.user = { id: id, username: username };
 
     next();
   } catch (err) {

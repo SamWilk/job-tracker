@@ -4,8 +4,6 @@ import "./navbar.css";
 export default function NavBar({ authenticated, logout }) {
   const navigate = useNavigate();
 
-  console.log("Nav Auth:", authenticated);
-
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -15,26 +13,40 @@ export default function NavBar({ authenticated, logout }) {
 
         <div className="navbar-spacer" />
 
-        {authenticated ? (
-          <button
-            className="navbar-login-btn"
-            aria-label="Sign Out"
-            onClick={() => {
-              logout();
-              navigate("/");
-            }}
-          >
-            Sign Out
-          </button>
-        ) : (
-          <button
-            className="navbar-login-btn"
-            onClick={() => navigate("/login")}
-            aria-label="Login"
-          >
-            Login
-          </button>
-        )}
+        <div className="button-container">
+          {" "}
+          {authenticated ? (
+            <button
+              className="navbar-login-btn"
+              aria-label="Sign Out"
+              onClick={() => {
+                navigate("/home");
+              }}
+            >
+              Home
+            </button>
+          ) : undefined}
+          {authenticated ? (
+            <button
+              className="navbar-login-btn"
+              aria-label="Sign Out"
+              onClick={() => {
+                logout();
+                navigate("/");
+              }}
+            >
+              Sign Out
+            </button>
+          ) : (
+            <button
+              className="navbar-login-btn"
+              onClick={() => navigate("/login")}
+              aria-label="Login"
+            >
+              Login
+            </button>
+          )}
+        </div>
       </div>
     </nav>
   );

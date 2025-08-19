@@ -23,23 +23,40 @@ router.post("/", hashPassword, async (req, res) => {
       .status(400)
       .json({ error: "Name, email, and password is required" });
   try {
-    console.log({ username, email, password });
-    const results = await pool.query(
+    await pool.query(
       "INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3)",
       [username, email, password]
     );
-    const token = jwt.sign({ username: username }, JWT_SECRET, {
-      expiresIn: JWT_EXPIRY,
-    });
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    });
+    const userInfo = await pool.query(
+      "select u.id, u.username, u.email, u.is_validated from users u where u.username=$1",
+      [username]
+    );
+    if (userInfo.rowCount > 0) {
+      const { id, username, email, is_validated } = userInfo.rows.pop();
 
-    res.status(201).json({ message: "User created", username: username });
+      const token = jwt.sign(
+        {
+          id: id,
+          username: username,
+          email: email,
+          is_validated: is_validated,
+        },
+        JWT_SECRET,
+        {
+          expiresIn: JWT_EXPIRY,
+        }
+      );
+
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      });
+
+      res.status(201).json({ message: "User created", username: username });
+    }
   } catch (error) {
     console.log(`Error: ${error.message}`);
     res.status(500).json({ error: "Error creating user" });

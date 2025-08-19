@@ -3,10 +3,17 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./signup.css";
 import UrlConfig from "../../../environment/getURLConfig";
+import { useAuthCheck } from "../../hooks/auth/useAuth";
+import { useEffect } from "react";
 
 export default function SignupPage({ recheck }) {
   const apiUrl = UrlConfig.getApiUrl();
   const Navigate = useNavigate();
+  const { authenticated } = useAuthCheck();
+
+  useEffect(() => {
+    if (authenticated) Navigate("/home");
+  }, [authenticated, Navigate]);
 
   return (
     <main className="signup-page">
@@ -52,14 +59,8 @@ export default function SignupPage({ recheck }) {
               if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
               } else {
-                var body;
-                try {
-                  body = await response.json();
-                } catch (err) {
-                  console.error("Error parsing response from api", err);
-                }
                 await recheck();
-                Navigate(`/Home?username=${body.username}`);
+                Navigate(`/Home`);
               }
             } catch (err) {
               console.error("Error hitting api", err);
