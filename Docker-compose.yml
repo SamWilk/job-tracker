@@ -27,11 +27,11 @@ services:
       - db
     environment:
       NODE_ENV: production
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: samwilk
-      DB_PASSWORD: password
-      DB_NAME: jobtrackr
+      PGHOST: db
+      PGPORT: 5432
+      PGUSER: samwilk
+      PGPASSWORD: test
+      PGDATABASE: jobtrackr
 
   db:
     image: postgres:15
