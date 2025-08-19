@@ -91,7 +91,7 @@ export default function SignupPage({ recheck }) {
                 onClick={() => Navigate("/")}
                 style={{ marginTop: "1rem" }}
               >
-                Back to Home
+                Back to Landing
               </button>
             </Form>
           )}
