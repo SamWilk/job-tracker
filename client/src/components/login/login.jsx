@@ -1,14 +1,14 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, setIn } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./login.css";
 import UrlConfig from "../../../environment/getURLConfig";
-import { useAuthCheck } from "../../hooks/auth/useAuth";
+import { useState } from "react";
 
-export default function LoginPage() {
+export default function LoginPage({ recheck }) {
   const apiUrl = UrlConfig.getApiUrl();
   const navigate = useNavigate();
-  const { refreshAuth } = useAuthCheck();
+  const [invalid, setInvalid] = useState(false);
 
   return (
     <main className="login-page">
@@ -45,7 +45,11 @@ export default function LoginPage() {
               });
 
               if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                if (response.status == 401) {
+                  setInvalid(true);
+                } else {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                }
               } else {
                 var body;
                 var user;
@@ -55,7 +59,8 @@ export default function LoginPage() {
                 } catch (err) {
                   console.error("Error parsing response from api", err);
                 }
-                await refreshAuth();
+                setInvalid(false);
+                await recheck();
                 navigate(`/Home?username=${user.username}`);
               }
             } catch (err) {
@@ -73,6 +78,12 @@ export default function LoginPage() {
               <label htmlFor="password">Password</label>
               <Field name="password" type="password" />
               <ErrorMessage name="password" component="div" className="error" />
+
+              {invalid && (
+                <div className="error invalid-login">
+                  Invalid email or password. Please try again.
+                </div>
+              )}
 
               <button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Logging In..." : "Log In"}

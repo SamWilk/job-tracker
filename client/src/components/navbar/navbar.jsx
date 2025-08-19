@@ -1,10 +1,10 @@
 import { useNavigate, Link } from "react-router-dom";
 import "./navbar.css";
-import { useAuthCheck } from "../../hooks/auth/useAuth";
 
-export default function NavBar() {
+export default function NavBar({ authenticated, logout }) {
   const navigate = useNavigate();
-  const { authenticated } = useAuthCheck();
+
+  console.log("Nav Auth:", authenticated);
 
   return (
     <nav className="navbar">
@@ -16,7 +16,14 @@ export default function NavBar() {
         <div className="navbar-spacer" />
 
         {authenticated ? (
-          <button className="navbar-login-btn" aria-label="Sign Out">
+          <button
+            className="navbar-login-btn"
+            aria-label="Sign Out"
+            onClick={() => {
+              logout();
+              navigate("/");
+            }}
+          >
             Sign Out
           </button>
         ) : (
