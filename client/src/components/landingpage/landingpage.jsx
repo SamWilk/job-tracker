@@ -1,26 +1,38 @@
 import { Link } from "react-router-dom";
 import "./landingpage.css";
+import jobTrackrLanding from "../../assets/Job-trackr-landing.png";
 
-export default function LandingPage() {
+export default function LandingPage({ authenticated }) {
   return (
     <main className="landing-page">
       <div className="landing-container">
-        <h1 className="landing-title">Your Job Hunt, Organized.</h1>
-        <p className="landing-subtitle">
-          JobTrackr is the simple, powerful way to keep track of all your job
-          applications in one place. Stay on top of deadlines, monitor
-          application statuses, and never lose track of an opportunity again.
-        </p>
-
+        <div className="landing-hero-row">
+          <div className="landing-hero-text">
+            <h1 className="landing-title">Your Job Hunt, Organized.</h1>
+            <p className="landing-subtitle">
+              JobTrackr is the simple, powerful way to keep track of all your
+              job applications in one place. Stay on top of deadlines, monitor
+              application statuses, and never lose track of an opportunity
+              again.
+            </p>
+          </div>
+          <img
+            src={jobTrackrLanding}
+            alt="JobTrackr"
+            className="landing-image"
+            height={300}
+          />
+        </div>
         <div className="landing-buttons">
-          <Link to="/signup" className="btn btn-primary">
-            Get Started
-          </Link>
+          {authenticated ? undefined : (
+            <Link to="/signup" className="btn btn-primary">
+              Get Started
+            </Link>
+          )}
           <Link to="/learn-more" className="btn btn-secondary">
             Learn More
           </Link>
         </div>
-
         <section className="features">
           <Feature
             title="Track Applications"

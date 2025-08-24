@@ -1,3 +1,25 @@
+/* Flex row for hero section */
+.landing-hero-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.landing-hero-text {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.landing-image {
+  flex-shrink: 0;
+  max-width: 350px;
+  height: auto;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
 /* Root defaults for better scaling */
 :root {
   --primary-color: #2563eb;

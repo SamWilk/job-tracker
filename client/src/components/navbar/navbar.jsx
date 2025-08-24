@@ -16,35 +16,44 @@ export default function NavBar({ authenticated, logout }) {
         <div className="button-container">
           {" "}
           {authenticated ? (
-            <button
-              className="navbar-login-btn"
-              aria-label="Sign Out"
-              onClick={() => {
-                navigate("/home");
-              }}
-            >
-              Home
-            </button>
-          ) : undefined}
-          {authenticated ? (
-            <button
-              className="navbar-login-btn"
-              aria-label="Sign Out"
-              onClick={() => {
-                logout();
-                navigate("/");
-              }}
-            >
-              Sign Out
-            </button>
+            <>
+              <button
+                className="navbar-login-btn"
+                aria-label="Home"
+                onClick={() => {
+                  navigate("/home");
+                }}
+              >
+                Home
+              </button>
+              <button
+                className="navbar-login-btn"
+                aria-label="Sign Out"
+                onClick={() => {
+                  logout();
+                  navigate("/");
+                }}
+              >
+                Sign Out
+              </button>
+            </>
           ) : (
-            <button
-              className="navbar-login-btn"
-              onClick={() => navigate("/login")}
-              aria-label="Login"
-            >
-              Login
-            </button>
+            <>
+              <button
+                className="navbar-login-btn"
+                onClick={() => navigate("/login")}
+                aria-label="Login"
+              >
+                Login
+              </button>
+              <button
+                className="navbar-login-btn"
+                onClick={() => navigate("/signup")}
+                aria-label="Sign Up"
+              >
+                Sign Up
+              </button>
+            </>
           )}
         </div>
       </div>

@@ -40,7 +40,7 @@ export default function SignupPage({ recheck }) {
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(false);
             const name = values.name;
-            const email = values.email;
+            const email = values.email.toLowerCase();
             const password = values.password;
             try {
               const response = await fetch(`${apiUrl}/users`, {

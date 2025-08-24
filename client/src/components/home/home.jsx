@@ -3,8 +3,8 @@ import { useAuthCheck } from "../../hooks/auth/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-export default function HomePage() {
-  const { loading, authenticated, user } = useAuthCheck();
+export default function HomePage({ authenticated }) {
+  const { loading, user } = useAuthCheck();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,6 +46,7 @@ export default function HomePage() {
             <p className="home-card-text">
               Status: {user?.is_validated ? "Verified ✅" : "Not Verified ❌"}
             </p>
+            {authenticated ? undefined : <button>Verify Email</button>}
           </div>
 
           <div className="home-card">

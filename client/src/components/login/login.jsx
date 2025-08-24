@@ -4,11 +4,17 @@ import * as Yup from "yup";
 import "./login.css";
 import UrlConfig from "../../../environment/getURLConfig";
 import { useState } from "react";
+import { useAuthCheck } from "../../hooks/auth/useAuth";
 
 export default function LoginPage({ recheck }) {
   const apiUrl = UrlConfig.getApiUrl();
   const navigate = useNavigate();
   const [invalid, setInvalid] = useState(false);
+  const { authenticated } = useAuthCheck();
+
+  if (authenticated) {
+    navigate("/home");
+  }
 
   return (
     <main className="login-page">
@@ -30,7 +36,7 @@ export default function LoginPage({ recheck }) {
           })}
           onSubmit={async (values, { setSubmitting }) => {
             try {
-              const email = values.email;
+              const email = values.email.toLowerCase();
               const password = values.password;
               const response = await fetch(`${apiUrl}/users/login`, {
                 method: "POST",

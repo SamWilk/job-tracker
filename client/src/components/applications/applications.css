@@ -1,0 +1,56 @@
+:root {
+  --primary-color: #2563eb;
+  --primary-color-hover: #1d4ed8;
+  --secondary-color: #e5e7eb;
+  --secondary-color-hover: #d1d5db;
+  --text-color: #111827;
+  --text-muted: #374151;
+  --bg-light: #f9fafb;
+  --bg-white: #ffffff;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.applications-page {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: var(--bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.applications-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.applications-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.applications-subtitle {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.applications-list-empty {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-top: 2rem;
+}
