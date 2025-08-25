@@ -40,6 +40,7 @@ jobs:
           cd client
           npm i
           npm run build
+          cd ../
 
   build-client-docker:
     runs-on: ubuntu-latest
