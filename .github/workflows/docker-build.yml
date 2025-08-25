@@ -41,6 +41,7 @@ jobs:
           ls
           ls ./src
           ls ./src/components
+          ls ./src/components/notFound
 
   build-client-docker:
     runs-on: ubuntu-latest
