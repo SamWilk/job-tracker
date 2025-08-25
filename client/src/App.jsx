@@ -3,7 +3,7 @@ import NavBar from "./components/navbar/navbar";
 import SignupPage from "./components/signup/signup";
 import LandingPage from "./components/landingpage/landingpage";
 import LoginPage from "./components/login/login";
-import NotFound from "./components/notFound/notfound";
+import NotFound from "./components/notfound/notfound";
 import HomePage from "./components/home/home";
 import ApplicationsPage from "./components/applications/applications";
 import LearnMore from "./components/learnmore/learnmore";
