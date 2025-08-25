@@ -40,7 +40,6 @@ jobs:
           cd client
           npm i
           npm run build
-          cd ../
 
   build-client-docker:
     runs-on: ubuntu-latest
@@ -60,7 +59,6 @@ jobs:
         with:
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/job-trackr-client:latest
-          context: ./client
 
   build-server-docker:
     runs-on: ubuntu-latest
@@ -80,4 +78,4 @@ jobs:
         with:
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/job-trackr-server:latest
-          context: ./server
+          context: ../server
