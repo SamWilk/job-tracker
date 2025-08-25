@@ -41,7 +41,7 @@ jobs:
           ls
           ls ./src
           ls ./src/components
-          ls ./src/components/NotFound
+          ls ./src/components/notFound
           npm i
           npm run build
 
