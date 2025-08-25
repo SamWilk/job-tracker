@@ -72,6 +72,7 @@
   display: inline-block;
   border: none;
   cursor: pointer;
+  max-height: fit-content;
 }
 
 .btn-primary {
@@ -105,6 +106,10 @@
 
 /* Feature cards */
 .home-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--bg-white);
   padding: 1.5rem;
   border-radius: var(--radius-lg);
@@ -129,6 +134,11 @@
   font-size: 0.9rem;
   color: var(--text-muted);
   line-height: 1.4;
+}
+
+.email {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Responsive layout */

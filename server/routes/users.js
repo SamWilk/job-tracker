@@ -99,14 +99,52 @@ router.put("/:id", (req, res) => {
   res.json(users[userIndex]);
 });
 
-router.delete("/:id", (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const userIndex = users.findIndex((u) => u.id === id);
-  if (userIndex === -1)
-    return res.status(404).json({ error: "User not found" });
+router.delete("/:id", authenticateToken, async (req, res) => {
+  try {
+    const userId = parseInt(req.params.id, 10);
 
-  const deletedUser = users.splice(userIndex, 1);
-  res.json(deletedUser[0]);
+    if (req.user.id !== userId) {
+      return res
+        .status(403)
+        .json({ error: "You can only delete your own account" });
+    }
+
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+
+      const result = await client.query(
+        "DELETE FROM users WHERE id = $1 RETURNING username",
+        [userId]
+      );
+
+      if (result.rowCount === 0) {
+        await client.query("ROLLBACK");
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      await client.query("COMMIT");
+
+      res.clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      });
+
+      res.status(200).json({
+        message: "Account successfully deleted",
+        username: result.rows[0].username,
+      });
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({ error: "Failed to delete account" });
+  }
 });
 
 ///////////////////// PROFILE end points /////////////////////

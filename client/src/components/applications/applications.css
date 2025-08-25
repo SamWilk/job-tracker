@@ -1,3 +1,228 @@
+/* Responsive styles for mobile and small screens */
+@media (max-width: 600px) {
+  .applications-root,
+  .applications-list {
+    padding: 8px;
+    font-size: 15px;
+  }
+  .applications-title {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .applications-subtitle {
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .application-form {
+    padding: 10px 4px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .form-row label {
+    font-size: 1em;
+  }
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    font-size: 1em;
+    padding: 7px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .applications-list {
+    padding: 0;
+  }
+  .applications-list-empty {
+    font-size: 1em;
+    text-align: center;
+    margin: 12px 0;
+  }
+  .application-row,
+  .application-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 6px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .application-row > *,
+  .application-card > * {
+    margin-bottom: 6px;
+    width: 100%;
+  }
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger {
+    font-size: 1em;
+    padding: 8px 12px;
+    width: 100%;
+    margin-bottom: 6px;
+    box-sizing: border-box;
+  }
+  .form-error,
+  .error {
+    font-size: 0.95em;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+}
+.btn-danger {
+  background-color: #dc2626;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: #b91c1c;
+}
+
+.application-card-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  justify-content: space-between;
+}
+.form-buttons-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 1rem;
+}
+
+.form-buttons-row .btn {
+  flex: 1 1 0;
+  min-width: 0;
+  width: 100%;
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--primary-color-hover);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: var(--secondary-color-hover);
+}
+.application-form .btn,
+.application-form .btn-secondary {
+  min-width: 100%;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  margin-top: 1rem;
+}
+.application-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  background: var(--bg-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.application-form h2 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.application-form input,
+.application-form select,
+.application-form textarea {
+  flex: 1 1 0;
+  padding: 0.5rem;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  background: var(--bg-light);
+  color: var(--text-color);
+}
+
+.application-form textarea {
+  resize: vertical;
+}
+
+.form-error,
+.error {
+  color: #dc2626;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.applications-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0 0;
+  width: 100%;
+  max-width: 700px;
+}
+
+.application-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem 1rem;
+  margin-bottom: 1.25rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.application-card h3 {
+  margin: 0 0 0.25rem 0;
+  color: var(--primary-color);
+  font-size: 1.15rem;
+}
+
+.application-card p {
+  margin: 0.1rem 0;
+  color: var(--text-muted);
+}
+
+.application-card .btn {
+  align-self: flex-end;
+  margin-top: 0.5rem;
+}
 :root {
   --primary-color: #2563eb;
   --primary-color-hover: #1d4ed8;

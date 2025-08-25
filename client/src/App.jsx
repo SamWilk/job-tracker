@@ -6,6 +6,8 @@ import LoginPage from "./components/login/login";
 import NotFound from "./components/notFound/notFound";
 import HomePage from "./components/home/home";
 import ApplicationsPage from "./components/applications/applications";
+import LearnMore from "./components/learnmore/learnmore";
+import Settings from "./components/settings/settings";
 import { useAuthCheck } from "./hooks/auth/useAuth";
 
 export default function App() {
@@ -33,6 +35,8 @@ export default function App() {
           path="/applications"
           element={<ApplicationsPage authenticated={authenticated} />}
         />
+        <Route path="/learn-more" element={<LearnMore />} />
+        <Route path="/settings" element={<Settings logout={logout} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

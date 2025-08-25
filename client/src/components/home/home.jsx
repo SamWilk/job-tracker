@@ -13,7 +13,6 @@ export default function HomePage({ authenticated }) {
     }
   }, [loading, authenticated, navigate]);
 
-  if (loading) return <p>Loading...</p>;
   if (!authenticated) return null;
 
   return (
@@ -31,29 +30,29 @@ export default function HomePage({ authenticated }) {
           >
             View Applications
           </button>
-          <button
-            className="btn btn-secondary"
-            onClick={() => navigate("/profile")}
-          >
-            Edit Profile
-          </button>
         </div>
 
         <section className="home-features">
           <div className="home-card">
-            <h2 className="home-card-title">Profile</h2>
-            <p className="home-card-text">Email: {user?.email}</p>
-            <p className="home-card-text">
-              Status: {user?.is_validated ? "Verified ✅" : "Not Verified ❌"}
-            </p>
-            {authenticated ? undefined : <button>Verify Email</button>}
+            <div className="home-card-content">
+              <h2 className="home-card-title">Profile</h2>
+              <p className="home-card-text">Email: {user?.email}</p>
+              <p className="home-card-text">
+                Status: {user?.is_validated ? "Verified ✅" : "Not Verified ❌"}
+              </p>
+            </div>
+            {user?.is_validated ? undefined : (
+              <button disabled={true} className="btn btn-primary email">
+                <span>Verify Email</span> <span>(Coming soon)</span>
+              </button>
+            )}
           </div>
 
           <div className="home-card">
-            <h2 className="home-card-title">Quick Actions</h2>
-            <p className="home-card-text">
-              Access your most used features quickly.
-            </p>
+            <div className="home-card-content">
+              <h2 className="home-card-title">Quick Actions</h2>
+              <p className="home-card-text">Access things quickly here.</p>
+            </div>
             <button
               className="btn btn-primary"
               onClick={() => navigate("/settings")}

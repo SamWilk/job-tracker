@@ -24,7 +24,12 @@ export default function SignupPage({ recheck }) {
         </p>
 
         <Formik
-          initialValues={{ name: "", email: "", password: "" }}
+          initialValues={{
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
           validationSchema={Yup.object({
             name: Yup.string()
               .max(50, "Must be 50 characters or less")
@@ -35,6 +40,9 @@ export default function SignupPage({ recheck }) {
               .required("Required"),
             password: Yup.string()
               .min(6, "Must be at least 6 characters")
+              .required("Required"),
+            confirmPassword: Yup.string()
+              .oneOf([Yup.ref("password")], "Passwords must match")
               .required("Required"),
           })}
           onSubmit={async (values, { setSubmitting }) => {
@@ -80,6 +88,14 @@ export default function SignupPage({ recheck }) {
               <label htmlFor="password">Password</label>
               <Field name="password" type="password" />
               <ErrorMessage name="password" component="div" className="error" />
+
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <Field name="confirmPassword" type="password" />
+              <ErrorMessage
+                name="confirmPassword"
+                component="div"
+                className="error"
+              />
 
               <button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Signing Up..." : "Sign Up"}
