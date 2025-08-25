@@ -38,8 +38,9 @@ jobs:
           node-version: 22
       - run: |
           cd client
-          npm i
-          npm run build
+          ls
+          ls ./src
+          ls ./src/components
 
   build-client-docker:
     runs-on: ubuntu-latest
