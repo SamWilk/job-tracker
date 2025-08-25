@@ -12,6 +12,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Install OpenSSL
+        run: sudo apt-get update && sudo apt-get install -y openssl
+
+      - name: Generate Certificates
+        run: |
+          chmod +x ./generate-certs.sh
+          ./generate-certs.sh server server
+          ./generate-certs.sh localhost client
+          ./generate-certs.sh localhost postgres
+
+      - name: Upload Certificates as Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ssl-certificates
+          path: |
+            ./server/certs/
+            ./client/certs/
+            ./postgres/certs/
+          retention-days: 1
+
       - uses: actions/setup-node@v1
         with:
           node-version: 22
