@@ -24,7 +24,7 @@ jobs:
           ./generate-certs.sh localhost postgres
 
       - name: Upload Certificates as Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ssl-certificates
           path: |
