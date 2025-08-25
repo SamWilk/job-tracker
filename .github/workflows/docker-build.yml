@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-ui:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,7 +16,8 @@ jobs:
         with:
           node-version: 18
       - run: |
-          npm ci
+          cd ./client
+          npm i
           npm run build
 
   build-client-docker:
