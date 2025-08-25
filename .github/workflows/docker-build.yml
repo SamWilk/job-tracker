@@ -38,6 +38,10 @@ jobs:
           node-version: 22
       - run: |
           cd client
+          ls
+          ls ./src
+          ls ./src/components
+          ls ./src/components/NotFound
           npm i
           npm run build
 
