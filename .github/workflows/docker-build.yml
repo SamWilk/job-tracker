@@ -78,4 +78,4 @@ jobs:
         with:
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/job-trackr-server:latest
-          context: ../server/Dockerfile
+          context: ./server
