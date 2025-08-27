@@ -33,7 +33,8 @@ jobs:
             ./postgres/certs/
           retention-days: 1
 
-      - uses: actions/setup-node@v1
+      - name: Build Client App
+        uses: actions/setup-node@v1
         with:
           node-version: 22
       - run: |
