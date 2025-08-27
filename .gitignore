@@ -5,3 +5,5 @@ certs/
 /postgres/sql-scripts
 /postgres/pg_hba.conf
 /postgres/postgresql.conf
+
+/helm/UsefulCommands.md

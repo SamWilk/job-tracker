@@ -136,11 +136,6 @@
   line-height: 1.4;
 }
 
-.email {
-  display: flex;
-  flex-direction: column;
-}
-
 /* Responsive layout */
 @media (min-width: 640px) {
   .home-buttons {
