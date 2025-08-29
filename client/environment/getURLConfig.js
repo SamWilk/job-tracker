@@ -28,7 +28,7 @@ class UrlConfig {
 
     switch (env) {
       case "development":
-        url = "https://localhost:3001";
+        url = "http://localhost:3001";
         break;
       case "production":
         url = "https://localhost:443/api";
@@ -37,7 +37,7 @@ class UrlConfig {
         url = "https://test-api.myapp.com:3001";
         break;
       default:
-        url = "https://localhost:3001";
+        url = "http://localhost:3001";
     }
 
     return url;

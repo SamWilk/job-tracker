@@ -1,5 +1,3 @@
-import fs from "fs";
-import https from "https";
 import express from "express";
 import cors from "cors";
 
@@ -25,11 +23,7 @@ app.get("/", () => {
   console.log("Hello world, I am alive");
 });
 
-const sslOptions = {
-  key: fs.readFileSync("./certs/server.key"),
-  cert: fs.readFileSync("./certs/server.cert"),
-};
-
-https.createServer(sslOptions, app).listen(3001, () => {
-  console.log("HTTPS API running on https://localhost:3001");
+const PORT = 3001;
+app.listen(PORT, () => {
+  console.log(`HTTP API running on http://localhost:${PORT}`);
 });
