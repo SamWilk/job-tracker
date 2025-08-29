@@ -3,11 +3,11 @@ import authenticateToken from "../middleware/authToken.js";
 
 const router = express.Router();
 
-router.get("/verify", authenticateToken, async (req, res) => {
+router.get("/api/verify", authenticateToken, async (req, res) => {
   res.json({ valid: true, user: req.user });
 });
 
-router.post("/logout", (req, res) => {
+router.post("/api/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
     secure: true,

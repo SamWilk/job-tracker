@@ -78,7 +78,7 @@ router.get("/:id", authenticateToken, (req, res) => {
 });
 
 // UPDATE for a specific user's application
-router.put("/:id", authenticateToken, async (req, res) => {
+router.put("/api/:id", authenticateToken, async (req, res) => {
   const {
     user_id,
     company_name,
@@ -130,7 +130,7 @@ router.put("/:id", authenticateToken, async (req, res) => {
 });
 
 // DELETE for a specific user's application
-router.delete("/:id", authenticateToken, async (req, res) => {
+router.delete("/api/:id", authenticateToken, async (req, res) => {
   const { user_id } = req.body;
   const { id } = req.params;
   if (!user_id) {
