@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["https://localhost:3000", ""],
+    origin: ["https://localhost:3000", "https://localhost:443", ""],
     credentials: true,
   })
 );
@@ -21,7 +21,7 @@ app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/applications", applicationsRouter);
 
-app.get("/", () => {
+app.get("/api", () => {
   console.log("Hello world, I am alive");
 });
 
