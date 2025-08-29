@@ -16,7 +16,7 @@ let users = [
 ];
 let nextId = 3;
 
-router.post("/api/", hashPassword, async (req, res) => {
+router.post("/", hashPassword, async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password)
     return res
@@ -63,7 +63,7 @@ router.post("/api/", hashPassword, async (req, res) => {
   }
 });
 
-router.get("/api/", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const results = await pool.query(
       "Select u.id, u.username, u.is_validated from users u;"
@@ -75,18 +75,18 @@ router.get("/api/", async (req, res) => {
   }
 });
 
-router.post("/api/login", verifyPassword, async (req, res) => {
+router.post("/login", verifyPassword, async (req, res) => {
   res.json({ message: "Login successful", user: req.user });
 });
 
-router.get("/api/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const id = parseInt(req.params.id, 10);
   const user = users.find((u) => u.id === id);
   if (!user) return res.status(404).json({ error: "User not found" });
   res.json(user);
 });
 
-router.put("/api/:id", (req, res) => {
+router.put("/:id", (req, res) => {
   const id = parseInt(req.params.id, 10);
   const { name, email } = req.body;
 
@@ -99,7 +99,7 @@ router.put("/api/:id", (req, res) => {
   res.json(users[userIndex]);
 });
 
-router.delete("/api/:id", authenticateToken, async (req, res) => {
+router.delete("/:id", authenticateToken, async (req, res) => {
   try {
     const userId = parseInt(req.params.id, 10);
 
@@ -149,7 +149,7 @@ router.delete("/api/:id", authenticateToken, async (req, res) => {
 
 ///////////////////// PROFILE end points /////////////////////
 
-router.get("/api/profile", authenticateToken, async (req, res) => {
+router.get("/profile", authenticateToken, async (req, res) => {
   console.log("Trying to login, token is ok!");
   res.status(200);
 });

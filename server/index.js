@@ -21,7 +21,7 @@ app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/applications", applicationsRouter);
 
-app.get("/api", () => {
+app.get("/", () => {
   console.log("Hello world, I am alive");
 });
 
