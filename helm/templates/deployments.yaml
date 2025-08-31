@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: trackr-client
+  name: {{ .Values.client.name }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: trackr-client
+    app: {{ .Values.client.name }}
 spec:
   replicas: {{ .Values.client.replicaCount }}
   selector:
     matchLabels:
-      app: trackr-client
+      app: {{ .Values.client.name }}
   template:
     metadata:
       labels:
-        app: trackr-client
+        app: {{ .Values.client.name }}
     spec:
       containers:
-        - name: client
+        - name: {{ .Values.client.name }}
           image: {{ .Values.client.image }}
           ports:
             - containerPort: 80
@@ -24,22 +24,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: trackr-server
+  name: {{ .Values.server.name }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: trackr-server
+    app: {{ .Values.server.name }}
 spec:
   replicas: {{ .Values.server.replicaCount }}
   selector:
     matchLabels:
-      app: trackr-server
+      app: {{ .Values.server.name }}
   template:
     metadata:
       labels:
-        app: trackr-server
+        app: {{ .Values.server.name }}
     spec:
       containers:
-        - name: server
+        - name: {{ .Values.server.name }}
           image: {{ .Values.server.image }}
           ports:
             - containerPort: 3001

@@ -31,7 +31,7 @@ class UrlConfig {
         url = "http://localhost:3001";
         break;
       case "production":
-        url = "https://localhost:443/api";
+        url = "https://trackr.local/api";
         break;
       case "test":
         url = "https://test-api.myapp.com:3001";

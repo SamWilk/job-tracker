@@ -21,8 +21,8 @@ RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-COPY ./certs/localhost.cert /etc/nginx/certs/localhost.cert
-COPY ./certs/localhost.key /etc/nginx/certs/localhost.key
+COPY ./certs/trackr.local.cert /etc/nginx/certs/trackr.local.cert
+COPY ./certs/trackr.local.key /etc/nginx/certs/trackr.local.key
 
 EXPOSE 80
 

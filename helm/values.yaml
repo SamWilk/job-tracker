@@ -1,17 +1,26 @@
 namespace: trackr
 client:
   image: samwilk18/job-trackr-client:latest
-  replicaCount: 2
+  replicaCount: 1
   service:
     port: 80
+  name: trackr-client
+
 server:
   image: samwilk18/job-trackr-server:latest
-  replicaCount: 2
+  replicaCount: 1
   service:
     port: 3001
     env:
       NODE_ENV: production
+  name: trackr-server
+
 ingress:
   enabled: true
-  host: localhost
+  host: trackr.local
   tlsSecretName: trackr-tls
+
+service:
+  servername: trackr-server-service
+  clientname: trackr-client-service
+

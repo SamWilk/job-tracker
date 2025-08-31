@@ -19,14 +19,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: trackr-server-service
+                name: {{ .Values.service.servername }}
                 port:
                   number: 80
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: trackr-client-service
+                name: {{ .Values.service.clientname }}
                 port:
                   number: 80
 {{- end }}
