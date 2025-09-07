@@ -31,7 +31,7 @@ class UrlConfig {
         url = "https://localhost:3001";
         break;
       case "production":
-        url = "https://localhost:3001/api";
+        url = "https://localhost/api";
         break;
       case "test":
         url = "https://test-api.myapp.com:3001";
