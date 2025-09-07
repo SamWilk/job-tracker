@@ -1,0 +1,13 @@
+namespace: trackr
+client:
+  image: samwilk18/job-trackr-client:latest
+  replicaCount: 2
+  port: 80
+server:
+  image: samwilk18/job-trackr-server:latest
+  replicaCount: 2
+  port: 3001
+ingress:
+  enabled: true
+  host: localhost
+  tlsSecretName: trackr-tls

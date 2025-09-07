@@ -17,7 +17,7 @@ server:
 
 ingress:
   enabled: true
-  host: trackr.local
+  host: localhost
   tlsSecretName: trackr-tls
 
 service:

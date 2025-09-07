@@ -37,6 +37,6 @@ const sslOptions = {
   cert: fs.readFileSync("./certs/server.cert"),
 };
 
-https.createServer(sslOptions, app).listen(3001, () => {
-  console.log("HTTPS API running on https://localhost:3001");
+https.createServer(sslOptions, app).listen(3001, "0.0.0.0", () => {
+  console.log("HTTPS API running on https://0.0.0.0:3001");
 });

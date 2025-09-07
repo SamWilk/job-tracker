@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trackr-client
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: trackr-client
+spec:
+  replicas: {{ .Values.client.replicaCount }}
+  selector:
+    matchLabels:
+      app: trackr-client
+  template:
+    metadata:
+      labels:
+        app: trackr-client
+    spec:
+      containers:
+        - name: client
+          image: {{ .Values.client.image }}
+          ports:
+            - containerPort: {{ .Values.client.port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trackr-client-service
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: trackr-client
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.client.port }}
+  type: ClusterIP
