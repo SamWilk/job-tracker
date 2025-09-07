@@ -27,7 +27,6 @@ router.post("/", hashPassword, async (req, res) => {
       "INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3)",
       [username, email, password]
     );
-
     const userInfo = await pool.query(
       "select u.id, u.username, u.email, u.is_validated from users u where u.username=$1",
       [username]

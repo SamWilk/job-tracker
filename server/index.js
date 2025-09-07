@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import fs from "fs";
+import https from "https";
 
 import usersRouter from "./routes/users.js";
 import authRouter from "./routes/auth.js";
@@ -10,7 +12,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["https://localhost:3000", "https://localhost:443", ""],
+    origin: ["https://localhost:3000", "https://localhost:443", "*"],
     credentials: true,
   })
 );
@@ -19,11 +21,22 @@ app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/applications", applicationsRouter);
 
-app.get("/", () => {
-  console.log("Hello world, I am alive");
+app.get("/", (req, res) => {
+  res.send("This is the API");
 });
 
+app.get("/healthz", (req, res) => {
+  console.log("Hello world, I am alive");
+  res.send("Hello world, I am alive");
+});
+
+
 const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`HTTP API running on http://localhost:${PORT}`);
+const sslOptions = {
+  key: fs.readFileSync("./certs/server.key"),
+  cert: fs.readFileSync("./certs/server.cert"),
+};
+
+https.createServer(sslOptions, app).listen(3001, () => {
+  console.log("HTTPS API running on https://localhost:3001");
 });

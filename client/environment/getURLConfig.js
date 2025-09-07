@@ -28,7 +28,7 @@ class UrlConfig {
 
     switch (env) {
       case "development":
-        url = "http://localhost:3001";
+        url = "https://localhost:3001";
         break;
       case "production":
         url = "https://trackr.local/api";
@@ -37,7 +37,7 @@ class UrlConfig {
         url = "https://test-api.myapp.com:3001";
         break;
       default:
-        url = "http://localhost:3001";
+        url = "https://localhost:3001";
     }
 
     return url;
