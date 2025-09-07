@@ -1,7 +1,5 @@
 import express from "express";
 import cors from "cors";
-import fs from "fs";
-import https from "https";
 
 import usersRouter from "./routes/users.js";
 import authRouter from "./routes/auth.js";
@@ -30,13 +28,8 @@ app.get("/healthz", (req, res) => {
   res.send("Hello world, I am alive");
 });
 
-
 const PORT = 3001;
-const sslOptions = {
-  key: fs.readFileSync("./certs/server.key"),
-  cert: fs.readFileSync("./certs/server.cert"),
-};
 
-https.createServer(sslOptions, app).listen(3001, "0.0.0.0", () => {
-  console.log("HTTPS API running on https://0.0.0.0:3001");
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`HTTP API running on http://0.0.0.0:${PORT}`);
 });
