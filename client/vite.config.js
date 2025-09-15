@@ -11,8 +11,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     https: {
-      key: fs.readFileSync(path.resolve(__dirname, "./certs/trackr.local.key")),
-      cert: fs.readFileSync(path.resolve(__dirname, "./certs/trackr.local.cert")),
+      key: fs.readFileSync(path.resolve(__dirname, "./certs/localhost.key")),
+      cert: fs.readFileSync(path.resolve(__dirname, "./certs/localhost.cert")),
     },
     port: 3000,
   },

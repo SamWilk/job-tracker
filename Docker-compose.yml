@@ -30,7 +30,7 @@ services:
       PGHOST: db
       PGPORT: 5432
       PGUSER: samwilk
-      PGPASSWORD: test
+      PGPASSWORD: password
       PGDATABASE: jobtrackr
 
   db:
