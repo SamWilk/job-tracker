@@ -91,6 +91,10 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Create .env file for server from secrets
+        run: |
+          echo "PGHOST=${{ secrets.SERVERDOTENV }}" > ./server/.env
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:

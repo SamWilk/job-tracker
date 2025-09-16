@@ -24,6 +24,6 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY ./certs/localhost.cert /etc/nginx/certs/localhost.cert
 COPY ./certs/localhost.key /etc/nginx/certs/localhost.key
 
-EXPOSE 80
+EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]
