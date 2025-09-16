@@ -20,7 +20,7 @@ jobs:
         run: |
           chmod +x ./generate-certs.sh
           ./generate-certs.sh server server
-          ./generate-certs.sh trackr.local client
+          ./generate-certs.sh localhost client
           ./generate-certs.sh localhost postgres
 
       - name: Upload Certificates as Artifacts
