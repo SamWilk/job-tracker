@@ -82,6 +82,17 @@ jobs:
           chmod +x ./generate-certs.sh
           ./generate-certs.sh server server
 
+      - name: Create .env file for server from secrets
+        run: |
+            echo "PGHOST=${{ secrets.PGHOST }}" > ./server/.env
+            echo "PGPORT=${{ secrets.PGPORT }}" >> ./server/.env
+            echo "PGDATABASE=${{ secrets.PGDATABASE }}" >> ./server/.env
+            echo "PGUSER=${{ secrets.PGUSER }}" >> ./server/.env
+            echo "PGPASSWORD=${{ secrets.PGPASSWORD }}" >> ./server/.env
+            echo "PGSSL=${{ secrets.PGSSL }}" >> ./server/.env
+            echo "PGSSL_CA=${{ secrets.PGSSL_CA }}" >> ./server/.env
+            echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> ./server/.env
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -90,10 +101,6 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Create .env file for server from secrets
-        run: |
-          echo "PGHOST=${{ secrets.SERVERDOTENV }}" > ./server/.env
 
       - name: Build and push
         uses: docker/build-push-action@v6
