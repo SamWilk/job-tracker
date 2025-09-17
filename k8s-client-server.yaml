@@ -88,11 +88,11 @@ spec:
       name: client
       port:
         number: 80
-  tls:
-    - hosts:
-        - localhost
-        - api.localhost
-      secretName: job-tracker-tls
+  # tls:
+  #   - hosts:
+  #       - localhost
+  #       - api.localhost
+  #     secretName: job-tracker-tls
   rules:
     - host: localhost
       http:

@@ -7,3 +7,6 @@ certs/
 /postgres/postgresql.conf
 
 /helm/UsefulCommands.md
+
+/config
+/config/*
